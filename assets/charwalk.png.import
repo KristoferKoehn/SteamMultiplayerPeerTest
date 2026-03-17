@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drfbkdqmj0gu2"
-path="res://.godot/imported/explosion.png-730076d88b39dbfd5c22ad71f1135b01.ctex"
+uid="uid://bsqovikudjr0q"
+path="res://.godot/imported/charwalk.png-faa1106936dc3ced598a0e10a43eb5e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://explosion.png"
-dest_files=["res://.godot/imported/explosion.png-730076d88b39dbfd5c22ad71f1135b01.ctex"]
+source_file="res://assets/charwalk.png"
+dest_files=["res://.godot/imported/charwalk.png-faa1106936dc3ced598a0e10a43eb5e9.ctex"]
 
 [params]
 

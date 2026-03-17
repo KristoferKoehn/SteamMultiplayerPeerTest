@@ -1,0 +1,7 @@
+res://new_player.gd
+res://new_player.tscn
+res://tileset.tres
+res://lobby.tscn
+res://lobby.gd
+res://gamestate.gd
+res://score.gd

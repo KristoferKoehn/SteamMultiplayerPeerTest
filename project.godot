@@ -21,11 +21,11 @@ should type in his address and press 'play'."
 config/tags=PackedStringArray("2d", "demo", "network", "official")
 run/main_scene="res://lobby.tscn"
 config/features=PackedStringArray("4.6")
-config/icon="res://icon.webp"
+config/icon="res://assets/icon.webp"
 
 [autoload]
 
-gamestate="*res://gamestate.gd"
+GameState="*res://gamestate.gd"
 
 [display]
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://jhdlqsokif5o"]
+[gd_scene format=3 uid="uid://jhdlqsokif5o"]
 
-[ext_resource type="Script" path="res://lobby.gd" id="1"]
+[ext_resource type="Script" uid="uid://cvpa2nyi27prq" path="res://lobby.gd" id="1"]
 
-[node name="Lobby" type="VBoxContainer" node_paths=PackedStringArray("persona_name", "player_name", "error_label", "host", "address", "lobby_container", "steam_connect", "steam_players", "enet_address_entry", "enet_start_button")]
+[node name="Lobby" type="VBoxContainer" unique_id=435649749 node_paths=PackedStringArray("persona_name", "player_name", "error_label", "host", "address", "lobby_container", "steam_connect", "steam_players", "enet_address_entry", "enet_start_button", "enet_player_list")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,27 +18,30 @@ address = NodePath("TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxC
 lobby_container = NodePath("TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/ScrollContainer/LobbyContainer")
 steam_connect = NodePath("TabContainer/Steam/Connect")
 steam_players = NodePath("TabContainer/Steam/Players")
-enet_address_entry = NodePath("TabContainer/ENet/Players/MarginContainer/VBoxContainer/Address")
-enet_start_button = NodePath("TabContainer/ENet/Players/MarginContainer/VBoxContainer/Start")
+enet_address_entry = NodePath("TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer/Address")
+enet_start_button = NodePath("TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer/Start")
+enet_player_list = NodePath("TabContainer/ENet/Players/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer2")
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="." unique_id=1247362481]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Player Name:"
 
-[node name="Name" type="LineEdit" parent="."]
+[node name="Name" type="LineEdit" parent="." unique_id=369786587]
 layout_mode = 2
 size_flags_vertical = 0
 text = "The Warrior"
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1298825581]
 layout_mode = 2
 size_flags_vertical = 3
+current_tab = 0
 
-[node name="ENet" type="Control" parent="TabContainer"]
+[node name="ENet" type="Control" parent="TabContainer" unique_id=1144040851]
 layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="Players" type="PanelContainer" parent="TabContainer/ENet"]
+[node name="Players" type="PanelContainer" parent="TabContainer/ENet" unique_id=666974591]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -54,48 +57,66 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ENet/Players"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ENet/Players" unique_id=455964318]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ENet/Players/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/ENet/Players/MarginContainer" unique_id=1175816783]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer" unique_id=454823158]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1813327292]
 layout_mode = 2
 text = "ENet Connection"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Host" type="Button" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+[node name="Host" type="Button" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1052871849]
 layout_mode = 2
 text = "Host"
 
-[node name="Join" type="Button" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+[node name="Join" type="Button" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2094069209]
 layout_mode = 2
 text = "Join"
 
-[node name="Address" type="LineEdit" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+[node name="Address" type="LineEdit" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer" unique_id=956057495]
 layout_mode = 2
 placeholder_text = "Enter IP Address to Join"
 alignment = 1
 
-[node name="Start" type="Button" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+[node name="Start" type="Button" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer" unique_id=527978129]
 layout_mode = 2
 disabled = true
 text = "Start Game"
 
-[node name="Steam" type="Control" parent="TabContainer"]
-visible = false
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer" unique_id=877248445]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/MarginContainer" unique_id=1442329480]
 layout_mode = 2
 
-[node name="Players" type="Panel" parent="TabContainer/Steam"]
+[node name="Label" type="Label" parent="TabContainer/ENet/Players/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer2" unique_id=828620555]
+layout_mode = 2
+text = "Connected Players:"
+
+[node name="Steam" type="Control" parent="TabContainer" unique_id=988776587]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Players" type="Panel" parent="TabContainer/Steam" unique_id=1969428731]
+visible = false
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 31.0
@@ -104,7 +125,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="TabContainer/Steam/Players"]
+[node name="Label" type="Label" parent="TabContainer/Steam/Players" unique_id=321402933]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -121,7 +142,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Awaiting Players..."
 
-[node name="Start" type="Button" parent="TabContainer/Steam/Players"]
+[node name="Start" type="Button" parent="TabContainer/Steam/Players" unique_id=1535384205]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -138,7 +159,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "START!"
 
-[node name="List" type="ItemList" parent="TabContainer/Steam/Players"]
+[node name="List" type="ItemList" parent="TabContainer/Steam/Players" unique_id=1483022460]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -154,7 +175,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="LobbyID" type="LineEdit" parent="TabContainer/Steam/Players"]
+[node name="LobbyID" type="LineEdit" parent="TabContainer/Steam/Players" unique_id=1863979128]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,8 +191,8 @@ grow_vertical = 2
 placeholder_text = "Lobby ID"
 editable = false
 
-[node name="Connect" type="Panel" parent="TabContainer/Steam"]
-layout_mode = 2
+[node name="Connect" type="Panel" parent="TabContainer/Steam" unique_id=1196382319]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 31.0
@@ -180,7 +201,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Steam/Connect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Steam/Connect" unique_id=1957947792]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,61 +209,61 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Persona Name" type="Label" parent="TabContainer/Steam/Connect/VBoxContainer"]
+[node name="Persona Name" type="Label" parent="TabContainer/Steam/Connect/VBoxContainer" unique_id=373352896]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Steam/Connect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Steam/Connect/VBoxContainer" unique_id=959833638]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer" unique_id=1484171100]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="IPLabel" type="Label" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="IPLabel" type="Label" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1751157581]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "Lobby id:"
 
-[node name="IPAddress" type="LineEdit" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=926323666]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 placeholder_text = "Lobby Id Here"
 
-[node name="Host" type="Button" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Host" type="Button" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=100104690]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 text = "Host"
 
-[node name="Refresh" type="Button" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Refresh" type="Button" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2106159172]
 layout_mode = 2
 text = "Refresh
 "
 
-[node name="ErrorLabel" type="Label" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=740814239]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.820312, 0.291595, 0.291595, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer" unique_id=717338066]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LobbyContainer" type="VBoxContainer" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="LobbyContainer" type="VBoxContainer" parent="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=1629728742]
 layout_mode = 2
 
-[node name="ErrorDialog" type="AcceptDialog" parent="."]
+[node name="ErrorDialog" type="AcceptDialog" parent="." unique_id=1915492319]
 
-[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/VBoxContainer/Host" to="." method="_on_enet_host_pressed"]
-[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/VBoxContainer/Join" to="." method="_on_enet_join_pressed"]
-[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer/Host" to="." method="_on_enet_host_pressed"]
+[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer/Join" to="." method="_on_enet_join_pressed"]
+[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="TabContainer/Steam/Players/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="TabContainer/Steam/Connect/VBoxContainer/HBoxContainer/VBoxContainer/Refresh" to="." method="_request_lobby_list"]

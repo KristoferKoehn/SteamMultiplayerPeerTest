@@ -209,7 +209,7 @@ func create_enet_host(new_player_name : String):
 	peer = ENetMultiplayerPeer.new()
 	(peer as ENetMultiplayerPeer).create_server(DEFAULT_PORT)
 	player_name = new_player_name
-	players[1] = new_player_name
+	register_player.rpc(new_player_name)
 	multiplayer.set_multiplayer_peer(peer)
 
 func create_enet_client(new_player_name : String, address : String):
@@ -227,7 +227,7 @@ func create_enet_client(new_player_name : String, address : String):
 func _make_string_unique(query : String) -> String:
 	var count := 2
 	var trial := query
-	if gamestate.players.values().has(trial):
+	if players.values().has(trial):
 		trial = query + ' ' + str(count)
 		count += 1
 	return trial

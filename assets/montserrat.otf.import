@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://knb8u535cfkw"
-path="res://.godot/imported/montserrat.otf-0d875bde8933edfaf65407b0d9da84e5.fontdata"
+path="res://.godot/imported/montserrat.otf-344d7c85facec00a87358649b6f3ceaf.fontdata"
 
 [deps]
 
-source_file="res://montserrat.otf"
-dest_files=["res://.godot/imported/montserrat.otf-0d875bde8933edfaf65407b0d9da84e5.fontdata"]
+source_file="res://assets/montserrat.otf"
+dest_files=["res://.godot/imported/montserrat.otf-344d7c85facec00a87358649b6f3ceaf.fontdata"]
 
 [params]
 

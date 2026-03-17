@@ -30,7 +30,7 @@ func add_player(id, new_player_name):
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.set_text(new_player_name + "\n" + "0")
 	l.set_h_size_flags(SIZE_EXPAND_FILL)
-	var font = preload("res://montserrat.otf")
+	var font = preload("res://assets/montserrat.otf")
 	l.set("custom_fonts/font", font)
 	l.set("custom_font_size/font_size", 18)
 	add_child(l)
@@ -39,12 +39,12 @@ func add_player(id, new_player_name):
 
 
 func _ready():
-	for player in gamestate.players:
+	for player in GameState.players:
 		#TODO: Does not seem to be called for client?
-		add_player(player, gamestate.players[player])
+		add_player(player, GameState.players[player])
 	$"../Winner".hide()
 	set_process(true)
 
 
 func _on_exit_game_pressed():
-	gamestate.end_game()
+	GameState.end_game()

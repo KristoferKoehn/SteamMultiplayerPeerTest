@@ -17,6 +17,7 @@ extends Control
 signal game_log(what : String)
 
 func _ready():
+	print("setting up...")
 	persona_name.text = Steam.getPersonaName()
 	
 	# Called every time the node is added to the scene.

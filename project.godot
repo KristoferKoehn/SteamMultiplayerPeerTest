@@ -14,14 +14,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Multiplayer Bomber"
+config/name="MultiplayerPeerTest"
 config/description="A multiplayer implementation of the classical bomberman game.
 One of the players should press 'host', while the other
 should type in his address and press 'play'."
 config/tags=PackedStringArray("2d", "demo", "network", "official")
-run/main_scene="res://lobby.tscn"
+run/main_scene="uid://kwvoghblx3k1"
 config/features=PackedStringArray("4.6")
-config/icon="res://assets/icon.webp"
 
 [autoload]
 

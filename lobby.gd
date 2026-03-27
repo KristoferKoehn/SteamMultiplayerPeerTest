@@ -17,13 +17,17 @@ extends Control
 signal game_log(what : String)
 
 func _ready():
-	print("setting up...")
 	persona_name.text = Steam.getPersonaName()
 	
 	# Called every time the node is added to the scene.
 	GameState.connection_failed.connect(self._on_connection_failed)
 	GameState.connection_succeeded.connect(self._on_connection_success)
 	GameState.player_list_changed.connect(self.refresh_lobby)
+
+	tree_exiting.connect(func(): 
+		GameState.player_list_changed.disconnect(self.refresh_lobby)
+	)
+
 	GameState.player_list_changed.connect(self.build_enet_player_list)
 	GameState.game_ended.connect(self._on_game_ended)
 	GameState.game_error.connect(self._on_game_error)
@@ -36,10 +40,10 @@ func _ready():
 	
 	_setup_ui()
 
+
 func _setup_ui():
 	#Should be customizable, ultimately
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_CLOSE)
-	
 	Steam.lobby_match_list.connect(
 		func(lobbies : Array):
 			for sample in lobbies:
@@ -98,9 +102,10 @@ func _on_game_ended():
 	host.disabled = false
 
 
+@warning_ignore("unused_parameter")
 func _on_game_error(errtxt : String):
-	$ErrorDialog.dialog_text = errtxt
-	$ErrorDialog.popup_centered()
+	# $ErrorDialog.dialog_text = errtxt
+	# $ErrorDialog.popup_centered()
 	host.disabled = false
 
 
@@ -128,7 +133,8 @@ func refresh_lobby():
 	
 
 func _on_start_pressed():
-	GameState.begin_game()
+	#GameState.begin_game()
+	GameLayer.start_game_host("res://Levels/LevelOne/LevelOne.tscn")
 
 
 func _on_enet_host_pressed():

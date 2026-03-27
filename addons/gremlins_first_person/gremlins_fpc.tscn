@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dh3kqcfi5h3e4"]
+
+[ext_resource type="Script" uid="uid://cg3ffa607yvde" path="res://objects/PlayerControllerScript/gremlin_first_person.gd" id="1_f5edj"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dgthw"]
+top_radius = 0.25
+bottom_radius = 0.251
+height = 0.927
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5oqox"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5oqox"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luvdq"]
+albedo_color = Color(1, 0.007843138, 0.14509805, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_f5edj"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Head:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Head/Camera:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="FirstPersonCharacter" type="CharacterBody3D" unique_id=758639874 node_paths=PackedStringArray("label")]
+script = ExtResource("1_f5edj")
+label = NodePath("Head/Camera/Label3D")
+
+[node name="Head" type="Node3D" parent="." unique_id=111296819]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5261018, 0)
+
+[node name="Camera" type="Camera3D" parent="Head" unique_id=1937679943]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Head/Camera" unique_id=621763373]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.0019013882, 0.031181812, -0.37041086)
+mesh = SubResource("CylinderMesh_dgthw")
+skeleton = NodePath("../../..")
+
+[node name="Label3D" type="Label3D" parent="Head/Camera" unique_id=1527266409]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 0)
+text = "test"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=971168592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5oqox")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1557119328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_5oqox")
+surface_material_override/0 = SubResource("StandardMaterial3D_luvdq")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=592499372]
+replication_config = SubResource("SceneReplicationConfig_f5edj")

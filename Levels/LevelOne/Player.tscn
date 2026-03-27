@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c76ikohyk57mo"]
+
+[ext_resource type="Script" uid="uid://crmpm407e0m2l" path="res://Levels/LevelOne/player.gd" id="1_fpfna"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4tq4o"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fpfna"]
+
+[node name="Player" type="CharacterBody3D" unique_id=435900292 node_paths=PackedStringArray("cam", "label")]
+script = ExtResource("1_fpfna")
+cam = NodePath("Camera3D")
+label = NodePath("Label3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=42176689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_4tq4o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=121389145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_fpfna")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=35932392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2382398, 2.6735754)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=2079398189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+text = "PLAYER"

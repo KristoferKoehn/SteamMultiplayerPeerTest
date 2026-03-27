@@ -1,5 +1,6 @@
-res://lobby.tscn
-res://tileset.tres
-res://SceneSwitcher/SceneSwitcher.tscn
 res://SceneSwitcher/scene_switcher.gd
-res://lobby.gd
+res://gamestate.gd
+res://GameLayer.gd
+res://objects/PlayerControllerScript/gremlin_first_person.gd
+res://Levels/LevelOne/player.gd
+res://addons/gremlins_first_person/gremlins_fpc.tscn

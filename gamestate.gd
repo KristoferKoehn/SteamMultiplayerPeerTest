@@ -28,18 +28,22 @@ signal game_ended()
 signal game_error(what : String)
 signal game_log(what : String)
 
+signal peer_connected(peerID : int)
+
 func _ready():
 	Steam.steamInitEx(true, 480)
 	#peer = SteamMultiplayerPeer.new()
 	
 	# Keep connections defined locally, if they aren't likely to be used
 	# anywhere else, such as with a lambda function for readability.
-	
+
 	multiplayer.peer_connected.connect(
 		func(id : int):
 			# Tell the connected peer that we have also joined
 			register_player.rpc_id(id, player_name)
+			peer_connected.emit(id)
 	)
+
 	multiplayer.peer_disconnected.connect(
 		func(id : int):
 			if is_game_in_progress():
@@ -65,6 +69,7 @@ func _ready():
 			game_error.emit("Server disconnected")
 			end_game()
 	)
+
 	
 	Steam.lobby_joined.connect(
 		func (new_lobby_id: int, _permissions: int, _locked: bool, response: int):
@@ -115,6 +120,7 @@ func _ready():
 func _process(_delta : float):
 	Steam.run_callbacks()
 
+
 # Lobby management functions.
 @rpc("call_local", "any_peer")
 func register_player(new_player_name : String):
@@ -131,11 +137,7 @@ func unregister_player(id):
 @rpc("call_local")
 func load_world():
 	# Change scene.
-	var world = load("res://world.tscn").instantiate()
-	get_tree().get_root().add_child(world)
-	get_tree().get_root().get_node("Lobby").hide()
-
-	get_tree().set_pause(false) # Unpause and unleash the game!
+	SceneSwitcher.push_scene(load("res://world.tscn").instantiate())
 
 #region Lobbies
 
@@ -150,42 +152,6 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 	Steam.joinLobby(new_lobby_id)
 
 #endregion
-
-func begin_game():
-	#Ensure that this is only running on the server; if it isn't, we need
-	#to check our code.
-	assert(multiplayer.is_server())
-	
-	#call load_world on all clients
-	load_world.rpc()
-	
-	#grab the world node and player scene
-	var world : Node2D = get_tree().get_root().get_node("World")
-	var player_scene := load("res://new_player.tscn")
-	
-	#Iterate over our connected peer ids
-	var spawn_index = 0
-	
-	for peer_id in players:
-		print("PEER ID: ", peer_id)
-		var player : CharacterBody2D = player_scene.instantiate()
-		
-		player.set_player_name(players[peer_id])
-		# "true" forces a readable name, which is important, as we can't have sibling nodes
-		# with the same name.
-		world.get_node("Players").add_child(player, true)
-		
-		#Set the authorization for the player. This has to be called on all peers to stay in sync.
-		player.set_authority.rpc(peer_id)
-		
-		#Grab our location for the player.
-		var target : Vector2 = world.get_node("SpawnPoints").get_child(spawn_index).position
-		
-		#The peer has authority over the player's position, so to sync it properly,
-		#we need to set that position from that peer with an RPC.
-		player.teleport.rpc_id(peer_id, target)
-		
-		spawn_index += 1
 	
 # create_steam_socket and connect_steam_socket both create the multiplayer peer, instead
 # of _ready, for the sake of compatibility with other networking services
@@ -216,9 +182,11 @@ func create_enet_client(new_player_name : String, address : String):
 	peer = ENetMultiplayerPeer.new()
 	(peer as ENetMultiplayerPeer).create_client(address, DEFAULT_PORT)
 	multiplayer.set_multiplayer_peer(peer)
-	await multiplayer.connected_to_server
-	register_player.rpc(new_player_name)
-	players[multiplayer.get_unique_id()] = new_player_name
+	var f = func() -> void:
+		register_player.rpc(new_player_name)
+		players[multiplayer.get_unique_id()] = new_player_name
+	multiplayer.connected_to_server.connect(f, CONNECT_ONE_SHOT)
+	
 
 #endregion
 
